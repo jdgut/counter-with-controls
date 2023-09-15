@@ -61,7 +61,6 @@ export function increaseCounter(value) {
 export function renderComponent(start, root) {
     let seconds = increaseCounter(start);
     const counterInterval = setInterval(() => {
-        console.log(seconds);
         root.render(
           <React.StrictMode>
             <Counter digits={seconds} intervalId={counterInterval} root={root} />
