@@ -42,17 +42,6 @@ export function stopCounter(intervalId, root) {
 }
 
 /**
- * Increases the counter value by 1.
- *
- * @param {number} value - The current counter value.
- * @returns {number} The increased counter value.
- */
-export function increaseCounter(value) {
-    const counterVal = value + 1;
-    return counterVal;
-}
-
-/**
  * Renders the Counter component with a continuously increasing value.
  *
  * @param {number} start - The initial counter value.
@@ -83,3 +72,15 @@ export function renderStaticComponent(start, root) {
         </React.StrictMode>
       );
 }
+
+/**
+ * Increases the counter value by 1.
+ *
+ * @param {number} value - The current counter value.
+ * @returns {number} The increased counter value.
+ */
+function increaseCounter(value) {
+  const counterVal = value + 1;
+  return counterVal;
+}
+
