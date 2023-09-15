@@ -1,61 +1,86 @@
+import React from "react";
+import Counter from '../components/Counter';
+
 /**
- * Formats a number of seconds as a string with leading zeros.
+ * Converts the given number of seconds into a formatted string.
  *
  * @param {number} seconds - The number of seconds to format.
- * @returns {string[]} An array of formatted characters.
+ * @returns {string[]} An array of string digits representing the formatted seconds.
  */
-function formattedString(seconds) {
+export function formattedString(seconds) {
     return seconds.toString().padStart(6, '0').split('');
 }
 
 /**
- * Starts the counter and logs the current value.
+ * Starts a counter that renders the Counter component at regular intervals.
  *
- * @param {number} currentValue - The current counter value.
+ * @param {number} currentValue - The initial counter value.
+ * @param {ReactDOM} root - The root element to render the Counter component.
  */
-function startCounter(currentValue) {
-    console.log(currentValue);
+export function startCounter(currentValue, root) {
+    renderComponent(currentValue, root);
 }
 
 /**
- * Pauses the counter and logs the current value.
+ * Pauses the counter by clearing the interval.
  *
- * @param {number} currentValue - The current counter value.
+ * @param {number} intervalId - The ID of the interval to clear.
  */
-function pauseCounter(currentValue) {
-    console.log(currentValue);
-}
-
-/**
- * Stops the counter by clearing the timeout and logs a message.
- *
- * @param {number} intervalId - The interval ID returned by setTimeout.
- */
-function stopCounter(intervalId) {
+export function pauseCounter(intervalId) {
     clearTimeout(intervalId);
-    console.log('Counter stopped');
 }
 
 /**
- * Increases a counter value by 1.
+ * Stops the counter by clearing the interval and rendering a static Counter component.
+ *
+ * @param {number} intervalId - The ID of the interval to clear.
+ * @param {ReactDOM} root - The root element to render the static Counter component.
+ */
+export function stopCounter(intervalId, root) {
+    clearTimeout(intervalId);
+    renderStaticComponent(0, root);
+}
+
+/**
+ * Increases the counter value by 1.
  *
  * @param {number} value - The current counter value.
- * @returns {number} The updated counter value.
+ * @returns {number} The increased counter value.
  */
-function increaseCounter(value) {
+export function increaseCounter(value) {
     const counterVal = value + 1;
     return counterVal;
 }
 
-function renderComponent(Counter) {
-
+/**
+ * Renders the Counter component with a continuously increasing value.
+ *
+ * @param {number} start - The initial counter value.
+ * @param {ReactDOM} root - The root element to render the Counter component.
+ */
+export function renderComponent(start, root) {
+    let seconds = increaseCounter(start);
+    const counterInterval = setInterval(() => {
+        console.log(seconds);
+        root.render(
+          <React.StrictMode>
+            <Counter digits={seconds} intervalId={counterInterval} root={root} />
+          </React.StrictMode>
+        );
+        seconds = increaseCounter(seconds);
+      }, 1000);
 }
 
-
-module.exports = {
-    startCounter,
-    pauseCounter,
-    stopCounter,
-    increaseCounter,
-    formattedString
+/**
+ * Renders a static Counter component with the given value.
+ *
+ * @param {number} start - The value to display in the static Counter component.
+ * @param {ReactDOM} root - The root element to render the static Counter component.
+ */
+export function renderStaticComponent(start, root) {
+    root.render(
+        <React.StrictMode>
+          <Counter digits={start} root={root} />
+        </React.StrictMode>
+      );
 }
