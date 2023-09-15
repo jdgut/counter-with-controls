@@ -1,0 +1,69 @@
+%reset-Button {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  background: transparent;
+  /* inherit font & color from ancestor */
+  color: inherit;
+  font: inherit;
+  /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+  line-height: normal;
+  /* Corrects font smoothing for webkit */
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+  /* Corrects inability to style clickable `input` types in iOS */
+  -webkit-appearance: none;
+}
+
+
+
+body {
+    margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #282c34;
+  margin-top:20%
+}
+
+#root {
+  min-height: 100vh;
+
+  .container {
+    &.digits {
+      span {
+        border: 1px solid greenyellow;
+        justify-content: space-between;
+        border-radius: 1rem;
+        width: 8rem;
+        font-size: 4rem;
+        text-align: center;
+        margin: 0.5rem;
+        box-shadow: 0 .5rem .3rem greenyellow;
+      }
+    }
+
+    &.controls {
+      padding-top: 1.5rem;
+      button {
+        @extend %reset-Button;
+        color: white;
+        font-size: 4rem;
+        transition: transform .25s;
+
+        &:hover {
+            color: greenyellow;
+        }
+        &:active {
+          transform: translate(.25rem, .25rem);
+        }
+      }
+    }
+  }
+}
+
+
